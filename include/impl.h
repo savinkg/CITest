@@ -19,6 +19,8 @@ public:
     }
     constexpr Complex operator+(const Complex& op);
     constexpr Complex operator-(const Complex& op);
+    constexpr Complex operator+=(const Complex& op);
+    constexpr Complex operator-=(const Complex& op);
 };
 
 constexpr bool operator==(const Complex &op1,const Complex &op2);

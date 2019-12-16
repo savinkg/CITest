@@ -31,29 +31,26 @@ constexpr Complex Complex::operator-(const Complex& op)
 
 constexpr Complex Complex::operator+=(const Complex& op)
 {
-    Complex result;
+    this->_re = this._re + op.getRe();
+    this->_im = this._im + op.getIm();
 
-    result._re = _re + op.getRe();
-    result._im = _im + op.getIm();
-
-    return result;
+    return this;
 }
 
 constexpr Complex Complex::operator-=(const Complex& op)
 {
-    Complex result;
+    this._re = this._re - op.getRe();
+    this._im = this._im - op.getIm();
 
-    result._re = _re - op.getRe();
-    result._im = _im - op.getIm();
-
-    return result;
+    return this;
 }
-constexpr bool Complex::operator==(const Complex& op1,const Complex& op2)
+constexpr bool operator==(const Complex& op1,const Complex& op2)
 {
     return (op1.getRe() == op2.getRe()) && (op1.getIm() == op2.getIm());
 }
 
-constexpr Complex operator "" _i(int re, int im)
-{
-    return {re,im};
-}
+//constexpr Complex operator "" _i(int im)
+//{
+ //   Complex value(0,im);
+ //   return value;
+//}
