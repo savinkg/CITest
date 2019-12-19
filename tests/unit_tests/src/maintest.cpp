@@ -4,24 +4,24 @@
 
 TEST(Lab7,CopyConstructor)
 {
-    LinkedList myList{2,3,4};
-    LinkedList expectedList{1,2,3,4};
-    LinkedList clone = myList;
+    LinkedList<int> myList{2,3,4};
+    LinkedList<int> expectedList{1,2,3,4};
+    LinkedList<int> clone = myList;
     myList.insertAt(0,1);
 
     ASSERT_EQ(myList,expectedList);
 }
 
-LinkedList Copy()
+LinkedList<int> Copy()
 {
-    LinkedList r = {1,2,3};
+    LinkedList<int> r = {1,2,3};
     return r;
 }
 
 TEST(Lab7,MoveConstructor)
 {
-    LinkedList expectedList{1,2,3};
-    LinkedList clone = std::move(LinkedList{1,2,3});
+    LinkedList<int> expectedList{1,2,3};
+    LinkedList<int> clone = std::move(LinkedList<int>{1,2,3});
 
     ASSERT_EQ(clone,expectedList);
 }
