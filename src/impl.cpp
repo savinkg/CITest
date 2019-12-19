@@ -1,21 +1,24 @@
 #include "impl.h"
 
-LinkedList::LinkedList(): _first(nullptr) 
+template <typename T>
+LinkedList<T>::LinkedList<T>()
 {
 }
 
-LinkedList::LinkedList(std::initializer_list<int> list)
+template <typename T>
+LinkedList<T>::LinkedList(std::initializer_list<T> list)
 {
     int nodeNumber {0};
 
-    for(int element:list)
+    for(T element:list)
     {
         insertAt(nodeNumber,element);
         nodeNumber ++;
     }
 }
 
-LinkedList::LinkedList(const LinkedList &src)
+template <typename T>
+LinkedList<T>::LinkedList(const LinkedList<T> &src)
 {
     int nodeNumber  {0};
     Node *curNodeSrc {src._first};
@@ -28,7 +31,8 @@ LinkedList::LinkedList(const LinkedList &src)
     }
 }
 
-LinkedList::LinkedList(LinkedList &&src)
+template <typename T>
+LinkedList<T>::LinkedList(LinkedList &&src)
 {
     _first = src._first;
     linkSize = src.linkSize;
@@ -36,7 +40,8 @@ LinkedList::LinkedList(LinkedList &&src)
     src.linkSize = 0;
 }
 
-LinkedList::~LinkedList()
+template <typename T>
+LinkedList<T>::~LinkedList()
 {
     Node *curNode {_first};
     Node *prevNode {nullptr};
@@ -49,7 +54,8 @@ LinkedList::~LinkedList()
     }
 }
 
-void LinkedList::removeAt(int index)
+template <typename T>
+void LinkedList<T>::removeAt(int index)
 {
     if ((index >= 0) && (index <= linkSize))
     {
@@ -71,7 +77,8 @@ void LinkedList::removeAt(int index)
     }
 }
 
-void LinkedList::insertAt(int index,int value)
+template <typename T>
+void LinkedList<T>::insertAt(int index,T value)
 {
     if ((index >= 0) && (index <= linkSize))
     {
@@ -94,12 +101,14 @@ void LinkedList::insertAt(int index,int value)
     }
 }
 
-int LinkedList::getLength() const
+template <typename T>
+int LinkedList<T>::getLength() const
 {
     return linkSize;
 }
 
-void LinkedList::findNode(int index, Node **previousNode, Node **currentNode)
+template <typename T>
+void LinkedList<T>::findNode(int index, Node **previousNode, Node **currentNode)
 {
     for(int ii=0; ii<index; ii++)
     {
@@ -108,10 +117,17 @@ void LinkedList::findNode(int index, Node **previousNode, Node **currentNode)
     }
 }
 
-bool operator==(const LinkedList&op1,const LinkedList&op2)
+template <typename T>
+void LinkedList::sort(std::function<bool(T,T)>)
 {
-    LinkedList::Node *Node1 {op1._first};
-    LinkedList::Node *Node2 {op2._first};
+
+}
+
+template <typename T>
+bool operator==(const LinkedList<T>&op1,const LinkedList<T>&op2)
+{
+    LinkedList<T>::Node *Node1 {op1._first};
+    LinkedList<T>::Node *Node2 {op2._first};
 
     while (Node1 && Node2 && (Node1->value == Node2->value))
     {
@@ -123,9 +139,10 @@ bool operator==(const LinkedList&op1,const LinkedList&op2)
 
 }
 
-std::ostream& operator<<(std::ostream& os,const LinkedList &list)
+template<typename T>
+std::ostream& operator<<(std::ostream& os,const LinkedList<T> &list)
 {
-    LinkedList::Node *currentNode {list._first};
+    LinkedList<T>::Node *currentNode {list._first};
     while (currentNode)
     {
         os << currentNode->value;
